@@ -19,24 +19,28 @@ import React from 'react';
 function Header2() {
 	const { colorMode, toggleColorMode } = useColorMode();
 	return (
-		<Flex>
-			<Box p="2" ml="4" mt="2">
+		<Flex borderBottom="1px solid ">
+			<Box ml="3" mt="3">
 				<Heading size="md">
-					<LinkOverlay href="/">The Dragon Estacy</LinkOverlay>
+					<LinkOverlay href="#">The Dragon Estacy</LinkOverlay>
 				</Heading>
 			</Box>
 			<Spacer />
 
-			<FormControl display="flex" alignItems="center" m="3">
-				<FormLabel htmlFor="dark-toggle" mb="0">
+			{/* <FormControl display="flex" alignItems="center" m="3"> */}
+			<Box display="flex" alignItems="center" >
+				<FormLabel htmlFor="dark-toggle" pt="1" >
 					Dark mode
 				</FormLabel>
-				<Switch id="dark-toggle" onChange={toggleColorMode}>
-					{colorMode === 'light' ? 'Dark' : 'Light'}
+				
+				<Switch pr="2" id="dark-toggle" onChange={toggleColorMode} >
+					{colorMode === 'dark' ? 'Dark' : 'Light'}
 				</Switch>
-			</FormControl>
-            
-			<Spacer />
+			</Box>
+
+			{/* </FormControl> */}
+
+
 			{/* <Button onClick={toggleColorMode} m="3">
 				{colorMode === 'light' ? 'Dark' : 'Light'}
 			</Button> */}

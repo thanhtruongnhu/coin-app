@@ -2,6 +2,7 @@ import './App.css';
 import Example from './Example'
 import Header from './Header';
 import Header2 from './Header2';
+import Sidebar from './Sidebar';
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
         {/* <Example/> */}
 
         <Header2 />
-        {/* Sidebar */}
+        {/* Box: d="flex" */}
+        <Sidebar />
         {/* Switch: HomeScreen */}
         {/* Switch: Top Stock */}
         {/* Switch: Chart */}
