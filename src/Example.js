@@ -6,11 +6,19 @@ function Example() {
 	const { colorMode, toggleColorMode } = useColorMode();
 	return (
 		<>
-			<header>
+			{/* <header>
 				<Button onClick={toggleColorMode}>
 					{colorMode === 'light' ? 'Dark' : 'Light'}
 				</Button>
-			</header>
+			</header> */}
+			<Box
+				bg="blue.100"
+				p={4}
+				_hover={{ transform: 'scale(1.1)' }}
+				transition="300ms transform"
+			>
+				This is the Box
+			</Box>
 		</>
 	);
 }
