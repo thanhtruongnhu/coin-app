@@ -1,46 +1,60 @@
 import { Avatar } from '@chakra-ui/avatar';
 import { Button } from '@chakra-ui/button';
 import { useColorMode } from '@chakra-ui/color-mode';
-import { Box, Flex, Heading, LinkOverlay, Spacer } from '@chakra-ui/layout';
+import { FormControl, FormLabel } from '@chakra-ui/form-control';
+import {
+	Box,
+	Flex,
+	Heading,
+	Link,
+	LinkBox,
+	LinkOverlay,
+	Spacer,
+	Text,
+} from '@chakra-ui/layout';
+import { Switch } from '@chakra-ui/switch';
 import { Tag, TagLabel } from '@chakra-ui/tag';
 import React from 'react';
 
-function Header() {
-    const { colorMode, toggleColorMode } = useColorMode()
+function Header2() {
+	const { colorMode, toggleColorMode } = useColorMode();
 
 	return (
-		<Flex>
-			<Box p="2" ml="4" mt="2">
+		<Flex borderBottom="1px solid ">
+			<LinkBox ml="3" mt="3">
 				<Heading size="md">
 					<LinkOverlay href="#">The Dragon Estacy</LinkOverlay>
 				</Heading>
-			</Box>
+			</LinkBox>
 			<Spacer />
-			<Box mr="4" mt="3">
-				<Button colorScheme="teal" mr="4">
-					Sign Up
-				</Button>
-				<Button colorScheme="teal">Log in</Button>
+
+			{/* <FormControl display="flex" alignItems="center" m="3"> */}
+			<Box display="flex" alignItems="center">
+				<FormLabel htmlFor="dark-toggle" pt="1">
+					Dark mode
+				</FormLabel>
+
+				<Switch
+					pr="2"
+					id="dark-toggle"
+					onChange={toggleColorMode}
+					isChecked={colorMode === 'dark' ? true : false}
+				></Switch>
 			</Box>
-			<Spacer />
-			<Button onClick={toggleColorMode}>
-				{colorMode === 'light' ? 'Dark' : 'Light'}
-			</Button>
-            
-			<Tag size="lg" colorScheme="red" borderRadius="full" m="3">
-				<LinkOverlay href="#">
-					<Avatar
-						src="https://cdn.onlinewebfonts.com/svg/img_132120.png"
-						size="xs"
-						name="Kyle Nhu"
-						ml={-1}
-						mr={2}
-					/>
-					<TagLabel>Kyle</TagLabel>
-				</LinkOverlay>
+
+			<Tag size="lg" borderRadius="full" m="3">
+				<Avatar
+					src="https://cdn.onlinewebfonts.com/svg/img_132120.png"
+					size="xs"
+					name="Kyle Nhu"
+					ml={-1}
+					mr={2}
+				/>
+				<Link href="/">Kyle Nhu</Link>
+				{/* <TagLabel>Kyle</TagLabel> */}
 			</Tag>
 		</Flex>
 	);
 }
 
-export default Header;
+export default Header2;

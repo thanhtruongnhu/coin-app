@@ -5,10 +5,13 @@ import { Divider } from '@chakra-ui/layout';
 import { Box, Flex, Text } from '@chakra-ui/layout';
 import React from 'react';
 import SidebarOption from './SidebarOption';
+import AssessmentIcon from '@material-ui/icons/Assessment';
+import WhatshotIcon from '@material-ui/icons/Whatshot';
+import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 
 function Sidebar() {
 	return (
-		<Box maxW="260px" overflow="hidden">
+		<Box maxW="260px" overflow="hidden" flex="0.3">
 			<Box
 				d="flex"
 				mt="1"
@@ -21,17 +24,17 @@ function Sidebar() {
 			>
 				Main Board
 			</Box>
-			<Flex alignItems="center" pl="3" pt="1">
+			<Flex alignItems="center" pl="3" py="1">
 				<Icon as={CheckCircleIcon} color="green.500" pr="1" />
 				<Text fontWeight="400" fontSize="13px">
 					Kyle Nhu
 				</Text>
 			</Flex>
 			<Divider />
-			<SidebarOption Img={StarIcon} title="Top news" />{' '}
+			<SidebarOption Img={WhatshotIcon} title="Top Stocks" />{' '}
 			{/*Use capital "I" in Icon becuz, we passing a component as a prop*/}
-			{/* <SidebarOption Img={Inbox} title="Chart" />
-			<SidebarOption Img={Drafts} title="Port Folio" /> */}
+			<SidebarOption Img={AssessmentIcon} title="Chart" />
+			<SidebarOption Img={FolderOpenIcon} title="Port Folio" />
 		</Box>
 	);
 }

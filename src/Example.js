@@ -6,11 +6,11 @@ function Example() {
 	const { colorMode, toggleColorMode } = useColorMode();
 	return (
 		<>
-			{/* <header>
+			<header>
 				<Button onClick={toggleColorMode}>
 					{colorMode === 'light' ? 'Dark' : 'Light'}
 				</Button>
-			</header> */}
+			</header>
 			<Box
 				bg="blue.100"
 				p={4}
