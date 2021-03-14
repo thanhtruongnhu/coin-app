@@ -1,21 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const userSlice = createSlice({
+export const tickerSlice = createSlice({
 	name: "ticker",
 	initialState: {
 		value: null,
 	},
 	reducers: {
-		login: (state, action) => {
+		update: (state, action) => {
 			state.value = action.payload;
-		}, //Reducer 1 for login action
-		logout: (state) => {
-			state.value = null;
-		}, //Reducer 2 for logout action
+		}, 
 	},
 });
 
-export const { login, logout } = userSlice.actions;
+export const { update } = tickerSlice.actions;
 
 
 
@@ -24,6 +21,6 @@ export const { login, logout } = userSlice.actions;
 // in the slice file. For example: `useSelector((state) => state.counter.value)`
 
 // state: global store; .user(1): slice of info/ category;  .value(2): get a specific piece of user info
-export const selectUser = (state) => state.user.value;
+export const selectTicker = (state) => state.ticker.value;
 
-export default userSlice.reducer;
+export default tickerSlice.reducer;
