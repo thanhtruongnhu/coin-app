@@ -10,20 +10,17 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import CardTravelIcon from '@material-ui/icons/CardTravel';
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import { Skeleton } from '@chakra-ui/skeleton';
+import DonutSmallIcon from '@material-ui/icons/DonutSmall';
 
 function currencyFormat(num) {
 	return num?.toFixed(1).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 }
 
 function FeatureBox() {
-	// const [count, setCount] = useState(0);
-	// const [stock, setStock] = useState(null);
 	const balance = useSelector(selectBalance);
 	const ticker = useSelector(selectTicker);
 	const [initialposition, setInitialposition] = useState(null);
 	const [position, setPosition] = useState(null);
-	const [gain, setGain] = useState(null);
-	const [gainpercent, setGainpercent] = useState(null);
 
 	useEffect(() => {
 		ticker.map((a) =>
@@ -40,15 +37,14 @@ function FeatureBox() {
 			setInitialposition(null);
 			setPosition(null);
 		};
-	}, [ticker]); 
-
+	}, [ticker]);
 
 	return (
 		<Skeleton isLoaded={initialposition !== null ? true : false}>
-			<HStack justifyContent="space-between">
+			<HStack justifyContent="space-between" >
 				{/* Box 0: Available Cash */}
-				<Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-					<Flex>
+				<Box  maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+					<Flex justifyContent="center">
 						<Text fontSize="lg" fontWeight="500">
 							Cash
 						</Text>
@@ -81,14 +77,14 @@ function FeatureBox() {
 					</Stat>
 				</Box>
 
-				{/* Box 2: Stock Value */}
+				{/* Box 2: Coin Value */}
 				<Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
 					<Flex>
 						<Text fontSize="lg" fontWeight="500">
-							Stock Value
+							Coin Value
 						</Text>
 
-						<Icon as={AccountBalanceWalletIcon} pr="1" />
+						<Icon as={DonutSmallIcon} pr="1" />
 					</Flex>
 
 					<Stat>
@@ -107,7 +103,9 @@ function FeatureBox() {
 					</Flex>
 
 					<Stat>
-						<StatNumber>${currencyFormat(position - initialposition)}</StatNumber>
+						<StatNumber>
+							${currencyFormat(position - initialposition)}
+						</StatNumber>
 					</Stat>
 				</Box>
 
@@ -122,7 +120,12 @@ function FeatureBox() {
 					</Flex>
 
 					<Stat>
-						<StatNumber>{currencyFormat((position - initialposition)/initialposition*100)}%</StatNumber>
+						<StatNumber>
+							{currencyFormat(
+								((position - initialposition) / initialposition) * 100
+							)}
+							%
+						</StatNumber>
 					</Stat>
 				</Box>
 			</HStack>
