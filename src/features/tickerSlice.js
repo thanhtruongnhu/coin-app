@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const tickerSlice = createSlice({
 	name: "ticker",
 	initialState: {
-		value: null,
+		value: [],
 	},
 	reducers: {
 		update: (state, action) => {

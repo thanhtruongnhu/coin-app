@@ -1,22 +1,40 @@
 import { Box } from '@material-ui/core';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CoinDisplay from './CoinDisplay';
+import FeatureBox from './FeatureBox';
+import { selectBalance, assign } from './features/balanceSlice';
+import { update } from './features/tickerSlice';
 import { selectUser } from './features/userSlice';
 import db from './firebase';
+import TitleBar from './TitleBar';
 
 function PortFolio() {
 	const user = useSelector(selectUser);
+	const dispatch = useDispatch();
 	const [coinsApi, setCoinsApi] = useState([]);
 	const [coins, setCoins] = useState([]);
-	const [coinlist, setCoinlist] = useState(null);
+	const [coinlist, setCoinlist] = useState([]);
 
 	// 1. Pull data from Google Auth
 	// <Not yet implement>
+
 	// 2. Pull Firebase database & Find the user info using Auth data (email), then get the portfolio
 
 	useEffect(() => {
+		if (user.email) {
+			db.collection('user')
+				.doc(user.email)
+				.onSnapshot((doc) => dispatch(assign(doc.data().balance)));
+		}
+
+		// if (user.email) {
+		// 	db.collection('user')
+		// 		.doc(user.email)
+		// 		.onSnapshot((doc) => console.log(doc.data().balance) );
+		// }
+
 		db.collection('user')
 			.doc(user.email)
 			.collection('tickers')
@@ -27,20 +45,20 @@ function PortFolio() {
 						name: doc.data().name,
 						symbol: doc.data().symbol,
 						priceBought: doc.data().price_bought,
-						dateBought: doc.data().date_bought,
+						dateBought: Date.parse(doc.data().date_bought.toDate()),
 						quantity: doc.data().quantity,
 					}))
 				)
 			);
-	}, [user.email]);
+	}, [dispatch, user.email]);
 
 	// 3. Based on ticker symbols, pull corresponding ticker data from Geckon API
 	useEffect(() => {
-		function getted(coinapi) {
+		function get(coinapi) {
 			let oldCoin = coins.filter((aCoin) => aCoin.id === coinapi.id)[0];
 
 			let newCoin = {
-				gainPercent24: coinapi.price_change_percentage_24h * 100,
+				gainPercent24: coinapi.price_change_percentage_24h,
 				gain24: coinapi.price_change_24h * oldCoin.quantity,
 				currentPrice: coinapi.current_price,
 				image: coinapi.image,
@@ -66,22 +84,22 @@ function PortFolio() {
 				`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinlist}&order=market_cap_desc&per_page=10&page=1&sparkline=false`
 			)
 			.then((res) => {
-				setCoinsApi(res.data.map((coin) => getted(coin)));
+				setCoinsApi(res.data.map((coin) => get(coin)));
 			})
 			.catch((error) => console.log(error));
-	}, [coinlist, coins]);
 
-	console.log(coins);
+		if (coinsApi) {
+			dispatch(update(coinsApi));
+		}
+	}, [coinlist, coins, coinsApi, dispatch]);
+
+	// console.log(coins);
 	console.log(coinsApi);
 
-	// var req_tick = 'bitcoin,ethereum,binancecoin,tether,polkadot';
-
-	// price_change_24h
-	// current_price
-	// image
-
 	return (
-		<Box flex="0.7" overflow="hidden">
+		<Box flex="0.7">
+			<FeatureBox />
+			<TitleBar />
 			{coinsApi.map((coin) => {
 				return (
 					<CoinDisplay

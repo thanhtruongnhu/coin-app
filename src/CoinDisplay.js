@@ -1,11 +1,15 @@
 import { Image } from '@chakra-ui/image';
-import { Box, Heading, Stack, Text } from '@chakra-ui/layout';
+import { Box, Text } from '@chakra-ui/layout';
 import { Stat, StatArrow, StatHelpText, StatNumber } from '@chakra-ui/stat';
-import { VolumeUpTwoTone } from '@material-ui/icons';
 import React from 'react';
 
 function currencyFormat(num) {
 	return num.toFixed(1).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+}
+
+function Converter(x) {
+	var date = new Date(x); //Convert miliseconds to date
+	return date.toLocaleDateString();
 }
 
 function CoinDisplay({
@@ -47,8 +51,8 @@ function CoinDisplay({
 				textAlign="right"
 				justifyContent="space-between"
 			>
-				<Box w="73px"> {dateBought.toDate().toLocaleDateString()}</Box>
-				<Box w="35px">{quantity}</Box>
+				<Box w="73px"> {Converter(dateBought)}</Box>
+				<Box w="65px">{quantity}</Box>
 				<Box w="75px">${currencyFormat(priceBought)}</Box>
 				<Box w="75px">${currencyFormat(price)}</Box>
 				<Box w="85px">${currencyFormat(position)}</Box>
@@ -85,8 +89,6 @@ function CoinDisplay({
 					)}
 				</Stat>
 			</Box>
-
-			{/* <Box>${volume. }</Box> */}
 		</Box>
 	);
 }

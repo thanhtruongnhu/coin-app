@@ -11,7 +11,7 @@ import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 
 function Sidebar() {
 	return (
-		<Box maxW="260px" overflow="hidden" flex="0.3">
+		<Box minW="150px" maxW="260px" flex="0.3">
 			<Box
 				d="flex"
 				mt="1"
