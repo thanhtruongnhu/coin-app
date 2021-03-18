@@ -31,8 +31,13 @@ function CoinDisplay({
 			d="flex"
 			flexDirection="row"
 			alignItems="center"
+			justifyContent="center"
 			h="80px"
 			borderBottom="1px solid"
+			w="960px"
+			ml="50%"
+			mr="-50%"
+			transform="translate(-50%, -50%)"
 		>
 			<Box d="flex" alignItems="center" minW="250px">
 				<Image src={image} alt="crypto" h="30px" w="30px" mr="10px" />

@@ -31,7 +31,7 @@ function Sidebar() {
 				</Text>
 			</Flex>
 			<Divider />
-			<SidebarOption Img={WhatshotIcon} title="Top Stocks" />{' '}
+			<SidebarOption Img={WhatshotIcon} title="Top Crypto" />{' '}
 			{/*Use capital "I" in Icon becuz, we passing a component as a prop*/}
 			<SidebarOption Img={AssessmentIcon} title="Chart" />
 			<SidebarOption Img={FolderOpenIcon} title="Port Folio" />

@@ -9,13 +9,19 @@ function TitleBar() {
 			alignItems="center"
 			h="80px"
 			borderBottom="1px solid"
-            
+			justifyContent="center"
+			mt="80px"
+			w="960px"
+			ml="50%"
+			mr="-50%"
+			transform="translate(-50%, -50%)"
 		>
 			<Box
 				d="flex"
 				alignItems="center"
 				minW="250px"
 				justifyContent="space-between"
+				
 			>
 				<Box fontSize="lg" fontWeight="500">
 					Cryptocurrency

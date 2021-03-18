@@ -2,6 +2,7 @@ import { Box } from '@material-ui/core';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Chart from './Chart';
 import CoinDisplay from './CoinDisplay';
 import FeatureBox from './FeatureBox';
 import { selectBalance, assign } from './features/balanceSlice';
@@ -28,12 +29,6 @@ function PortFolio() {
 				.doc(user.email)
 				.onSnapshot((doc) => dispatch(assign(doc.data().balance)));
 		}
-
-		// if (user.email) {
-		// 	db.collection('user')
-		// 		.doc(user.email)
-		// 		.onSnapshot((doc) => console.log(doc.data().balance) );
-		// }
 
 		db.collection('user')
 			.doc(user.email)
@@ -97,7 +92,7 @@ function PortFolio() {
 	console.log(coinsApi);
 
 	return (
-		<Box flex="0.7">
+		<Box flex="0.7" py="20px" mx="20px">
 			<FeatureBox />
 			<TitleBar />
 			{coinsApi.map((coin) => {
@@ -119,6 +114,9 @@ function PortFolio() {
 					/>
 				);
 			})}
+
+
+			<Chart />
 		</Box>
 	);
 }
