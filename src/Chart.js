@@ -19,7 +19,7 @@ function Chart() {
 	// var list = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
 
 	useEffect(() => {
-		setList(ticker.map((coin) => coin.id));
+		setList(ticker.map((coin) => coin.name));
 		setDataset(ticker.map((coin) => coin.position));
 		colorMode === 'dark'
 			? setColor(['#e17055', '#0984e3', '#fdcb6e', '#00b894', '#6c5ce7'])
