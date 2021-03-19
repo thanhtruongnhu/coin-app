@@ -2,7 +2,7 @@ import { Box } from '@material-ui/core';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Chart from './Chart';
+import DonutChart from './DonutChart';
 import CoinDisplay from './CoinDisplay';
 import FeatureBox from './FeatureBox';
 import { selectBalance, assign } from './features/balanceSlice';
@@ -116,7 +116,7 @@ function PortFolio() {
 			})}
 
 
-			<Chart />
+			<DonutChart />
 		</Box>
 	);
 }

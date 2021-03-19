@@ -10,11 +10,14 @@ function TitleBar() {
 			h="80px"
 			borderBottom="1px solid"
 			justifyContent="center"
-			mt="80px"
+			mt="40px"
 			w="960px"
-			ml="50%"
-			mr="-50%"
-			transform="translate(-50%, -50%)"
+			// ml="50%"
+			// mr="-50%"
+			// transform="translate(-50%, -50%)"
+
+			ml="auto"
+			mr="auto"
 		>
 			<Box
 				d="flex"

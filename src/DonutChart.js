@@ -7,7 +7,7 @@ import { Pie } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 import { selectTicker } from './features/tickerSlice';
 
-function Chart() {
+function DonutChart() {
 	const { colorMode, toggleColorMode } = useColorMode();
 
 	const ticker = useSelector(selectTicker);
@@ -41,10 +41,12 @@ function Chart() {
 	return (
 		<Box
 			w="960px"
-			mt="250px"
-			ml="50%"
-			mr="-50%"
-			transform="translate(-50%, -50%)"
+			mt="50px"
+			// ml="50%"
+			// mr="-50%"
+			// transform="translate(-50%, -50%)"
+			ml="auto"
+			mr="auto"
 		>
 			{list === [] ? (
 				<Box>Loading...</Box>
@@ -87,7 +89,7 @@ function Chart() {
 						maintainAspectRatio: false,
 						legend: {
 							labels: {
-								fontSize: 25,
+								fontSize: 22,
 							},
 						},
 					}}
@@ -97,4 +99,4 @@ function Chart() {
 	);
 }
 
-export default Chart;
+export default DonutChart;
