@@ -4,12 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DonutChart from './DonutChart';
 import CoinDisplay from './CoinDisplay';
-import FeatureBox from './FeatureBox';
+import FeatureRow from './FeatureRow';
 import { selectBalance, assign } from './features/balanceSlice';
 import { update } from './features/tickerSlice';
 import { selectUser } from './features/userSlice';
 import db from './firebase';
 import TitleBar from './TitleBar';
+
 
 function PortFolio() {
 	const user = useSelector(selectUser);
@@ -17,6 +18,7 @@ function PortFolio() {
 	const [coinsApi, setCoinsApi] = useState([]);
 	const [coins, setCoins] = useState([]);
 	const [coinlist, setCoinlist] = useState([]);
+
 
 	// 1. Pull data from Google Auth
 	// <Not yet implement>
@@ -93,7 +95,8 @@ function PortFolio() {
 
 	return (
 		<Box flex="0.7" py="20px" mx="20px">
-			<FeatureBox />
+			
+			<FeatureRow />
 			<TitleBar />
 			{coinsApi.map((coin) => {
 				return (
@@ -114,7 +117,6 @@ function PortFolio() {
 					/>
 				);
 			})}
-
 
 			<DonutChart />
 		</Box>
