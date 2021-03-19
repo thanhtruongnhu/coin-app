@@ -18,6 +18,7 @@ function FeatureBox({ Icon, name, value }) {
         {/* {Icon && <Icon />} */}
 		<Box
 			maxW="sm"
+            minW="125px"
 			borderWidth="1px"
 			borderRadius="lg"
 			overflow="hidden"
