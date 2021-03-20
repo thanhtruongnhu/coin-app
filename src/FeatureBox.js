@@ -10,44 +10,50 @@ function currencyFormat(num) {
 	return num?.toFixed(1).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 }
 
-function FeatureBox({ Icon, name, value }) {
-    const { colorMode, toggleColorMode } = useColorMode();
+function FeatureBox({ Icon, name, value, percent }) {
+	const { colorMode, toggleColorMode } = useColorMode();
 
 	return (
-        <>
-        {/* {Icon && <Icon />} */}
-		<Box
-			maxW="sm"
-            minW="125px"
-			borderWidth="1px"
-			borderRadius="lg"
-			overflow="hidden"
-			_hover={
-				colorMode === 'dark'
-					? {
-							fontWeight: 'bold',
-							backgroundColor: '#606770',
-					  }
-					: {
-							fontWeight: 'bold',
-							backgroundColor: '#F2F2F2',
-							opacity: '0.8',
-					  }
-			}
-		>
-			<Flex justifyContent="center">
-				<Text fontSize="lg" fontWeight="500">
-					{name}
-				</Text>
+		<>
+			{/* {Icon && <Icon />} */}
+			<Box
+				maxW="sm"
+				minW="125px"
+				borderWidth="1px"
+				borderRadius="lg"
+				overflow="hidden"
+				_hover={
+					colorMode === 'dark'
+						? {
+								fontWeight: 'bold',
+								backgroundColor: '#606770',
+						  }
+						: {
+								fontWeight: 'bold',
+								backgroundColor: '#F2F2F2',
+								opacity: '0.8',
+						  }
+				}
+			>
+				<Flex justifyContent="center">
+					<Text fontSize="lg" fontWeight="500">
+						{name}
+					</Text>
 
-                {Icon && <Icon />}
-			</Flex>
+					{Icon && <Icon />}
+				</Flex>
 
-			<Stat>
-				<StatNumber>${currencyFormat(value)}</StatNumber>
-			</Stat>
-		</Box>
-        </>
+				{!percent ? (
+					<Stat>
+						<StatNumber>${currencyFormat(value)}</StatNumber>
+					</Stat>
+				) : (
+					<Stat>
+						<StatNumber>{currencyFormat(value)}%</StatNumber>
+					</Stat>
+				)}
+			</Box>
+		</>
 	);
 }
 

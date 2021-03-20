@@ -93,6 +93,7 @@ function FeatureRow() {
 						name="Gain"
 						value={gainPercent}
 						key={idList[4]}
+						percent={true}
 					/>
 				</HStack>
 			)}
