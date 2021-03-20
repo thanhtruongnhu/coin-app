@@ -13,7 +13,8 @@ function DonutChart() {
 	const ticker = useSelector(selectTicker);
 	const [list, setList] = useState([]);
 	const [dataset, setDataset] = useState([]);
-	const [color, setColor] = useState([]);
+	const [bgcolor, setBgcolor] = useState([]);
+	const [lgcolor, setLgcolor] = useState(null);
 
 	// console.log(coinlist);
 	// var list = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
@@ -21,16 +22,32 @@ function DonutChart() {
 	useEffect(() => {
 		setList(ticker.map((coin) => coin.name));
 		setDataset(ticker.map((coin) => coin.position));
-		colorMode === 'dark'
-			? setColor(['#e17055', '#0984e3', '#fdcb6e', '#00b894', '#6c5ce7'])
-			: setColor([
-					'rgba(255, 99, 132, 0.2)',
-					'rgba(54, 162, 235, 0.2)',
-					'rgba(255, 206, 86, 0.2)',
-					'rgba(75, 192, 192, 0.2)',
-					'rgba(153, 102, 255, 0.2)',
-					'rgba(255, 159, 64, 0.2)',
-			  ]);
+		// colorMode === 'dark'
+		// 	? setBgcolor(['#e17055', '#0984e3', '#fdcb6e', '#00b894', '#6c5ce7'])
+		// 	: //
+		// 	  setBgcolor([
+		// 			'rgba(255, 99, 132, 0.2)',
+		// 			'rgba(54, 162, 235, 0.2)',
+		// 			'rgba(255, 206, 86, 0.2)',
+		// 			'rgba(75, 192, 192, 0.2)',
+		// 			'rgba(153, 102, 255, 0.2)',
+		// 			'rgba(255, 159, 64, 0.2)',
+		// 	  ]);
+
+		if (colorMode === 'dark') {
+			setBgcolor(['#e17055', '#0984e3', '#fdcb6e', '#00b894', '#6c5ce7']);
+			setLgcolor('#FFFFFF');
+		} else {
+			setBgcolor([
+				'rgba(255, 99, 132, 0.2)',
+				'rgba(54, 162, 235, 0.2)',
+				'rgba(255, 206, 86, 0.2)',
+				'rgba(75, 192, 192, 0.2)',
+				'rgba(153, 102, 255, 0.2)',
+				'rgba(255, 159, 64, 0.2)',
+			]);
+			setLgcolor('#000000');
+		}
 
 		return () => {
 			setList([]);
@@ -57,7 +74,7 @@ function DonutChart() {
 						datasets: [
 							{
 								data: dataset,
-								backgroundColor: color,
+								backgroundColor: bgcolor,
 
 								borderColor: [
 									'rgba(255, 99, 132, 1)',
@@ -89,7 +106,8 @@ function DonutChart() {
 						maintainAspectRatio: false,
 						legend: {
 							labels: {
-								fontSize: 22,
+								fontSize: 20,
+								fontColor: lgcolor,
 							},
 						},
 					}}
