@@ -31,10 +31,10 @@ function Sidebar() {
 				</Text>
 			</Flex>
 			<Divider />
-			<SidebarOption Img={WhatshotIcon} title="Top Crypto" />{' '}
+			<SidebarOption Img={WhatshotIcon} title="Top Crypto" id='TopCrypto' />{' '}
 			{/*Use capital "I" in Icon becuz, we passing a component as a prop*/}
-			<SidebarOption Img={AssessmentIcon} title="Chart" />
-			<SidebarOption Img={FolderOpenIcon} title="Port Folio" />
+			<SidebarOption Img={AssessmentIcon} title="Chart" id='Chart' />
+			<SidebarOption Img={FolderOpenIcon} title="Port Folio" id='PortFolio' />
 		</Box>
 	);
 }

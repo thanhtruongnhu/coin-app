@@ -94,7 +94,7 @@ function PortFolio() {
 	console.log(coinsApi);
 
 	return (
-		<Box flex="0.7" py="20px" mx="20px">
+		<Box flex="0.7" py="20px" mx="20px" textAlign="center">
 			
 			<FeatureRow />
 			<TitleBar />

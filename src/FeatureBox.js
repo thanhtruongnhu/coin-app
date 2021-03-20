@@ -18,7 +18,7 @@ function FeatureBox({ Icon, name, value, percent }) {
 			{/* {Icon && <Icon />} */}
 			<Box
 				maxW="sm"
-				minW="125px"
+				minW="145px"
 				borderWidth="1px"
 				borderRadius="lg"
 				overflow="hidden"
@@ -35,12 +35,12 @@ function FeatureBox({ Icon, name, value, percent }) {
 						  }
 				}
 			>
-				<Flex justifyContent="center">
-					<Text fontSize="lg" fontWeight="500">
+				<Flex justifyContent="center" >
+					<Text fontSize="lg" fontWeight="500" mr="5px">
 						{name}
 					</Text>
 
-					{Icon && <Icon />}
+					{Icon && <Icon />}  {/*<Icon/> is Material UI component (not Chakra UI comp) */}
 				</Flex>
 
 				{!percent ? (
