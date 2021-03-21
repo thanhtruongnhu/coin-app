@@ -102,6 +102,7 @@ function PortFolio() {
 			initial={{opacity: 0}}
 			animate={{opacity: 1}}
 			exit={{opacity: 0}}
+			transition={{duration: 0.5}}
 		>
 			<FeatureRow />
 			<TitleBar />
@@ -121,6 +122,7 @@ function PortFolio() {
 						gain24={coin.gain24}
 						gainPercentage={coin.gainPercentage}
 						gain={coin.gain}
+						id={coin.id}
 					/>
 				);
 			})}

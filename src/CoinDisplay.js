@@ -1,7 +1,7 @@
 import { Image } from '@chakra-ui/image';
 import { Box, Flex, Heading, Kbd, Text } from '@chakra-ui/layout';
 import { Stat, StatArrow, StatHelpText, StatNumber } from '@chakra-ui/stat';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectHovertheme } from './features/hoverthemeSlice';
 import {
@@ -27,6 +27,8 @@ import {
 	NumberInputStepper,
 } from '@chakra-ui/number-input';
 import { useColorMode } from '@chakra-ui/color-mode';
+import { selectBalance } from './features/balanceSlice';
+import Update from './Update';
 
 function currencyFormat(num) {
 	return num.toFixed(1).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
@@ -50,14 +52,38 @@ function CoinDisplay({
 	gain24,
 	gainPercentage,
 	gain,
+	id,
 }) {
 	const hoverTheme = useSelector(selectHovertheme);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const btnRef = React.useRef();
-	const [isActive, setIsActive] = useState(true);
-	const { colorMode, toggleColorMode } = useColorMode();
+	const [isBuy, setIsBuy] = useState(true);
+	const balance = useSelector(selectBalance);
+	const [currentBalance, setCurrentBalance] = useState(balance);
 
-	console.log(isActive);
+	const [inputQuantity, setInputQuantity] = useState('0');
+	const [allowQuantity, setAllowQuantity] = useState(null);
+	const [activate, setActivate] = useState(false);
+	const parse = (val) => val.replace(/^\$/, '');
+
+	useEffect(() => {
+		setCurrentBalance(typeof balance === 'string' ? Number(balance) : balance);
+
+		if (isBuy) {
+			setAllowQuantity(Math.floor(currentBalance / price));
+		} else {
+			setAllowQuantity(quantity);
+		}
+
+		return () => {
+			setAllowQuantity(null);
+			setActivate(false);
+		};
+	}, [balance, isBuy, price, quantity]);
+
+	// console.log(isBuy);
+	// console.log(quantity);
+	// console.log(allowQuantity);
 
 	return (
 		<>
@@ -160,7 +186,7 @@ function CoinDisplay({
 									variant="outline"
 									border="0px"
 									borderRadius="10px"
-									isActive={isActive}
+									isActive={isBuy}
 									_active={{
 										bg: '#1E88E5',
 										transform: 'scale(0.98)',
@@ -169,8 +195,7 @@ function CoinDisplay({
 									backgroundColor="#2A2E39"
 									_hover={{ bg: '#363A45' }}
 									textColor="white"
-									onClick={() => setIsActive((isActive) => !isActive)}
-									mr="0"
+									onClick={() => setIsBuy((isBuy) => !isBuy)}
 								>
 									Buy
 								</Button>
@@ -180,7 +205,7 @@ function CoinDisplay({
 									variant="outline"
 									border="0px"
 									borderRadius="10px"
-									isActive={!isActive}
+									isActive={!isBuy}
 									_active={{
 										bg: '#EF5350',
 										transform: 'scale(0.98)',
@@ -189,7 +214,7 @@ function CoinDisplay({
 									backgroundColor="#2A2E39"
 									_hover={{ bg: '#363A45' }}
 									textColor="white"
-									onClick={() => setIsActive((isActive) => !isActive)}
+									onClick={() => setIsBuy((isBuy) => !isBuy)}
 								>
 									Sell
 								</Button>
@@ -204,20 +229,47 @@ function CoinDisplay({
 								<TabPanels>
 									<TabPanel>
 										<Text mb="5px">Quantity</Text>
-										<NumberInput defaultValue={15} min={10} max={20}>
+										<NumberInput
+											onChange={(valueString) =>
+												setInputQuantity(parse(valueString))
+											}
+											defaultValue={inputQuantity}
+											min={0}
+											max={allowQuantity}
+										>
 											<NumberInputField />
 											<NumberInputStepper>
 												<NumberIncrementStepper />
 												<NumberDecrementStepper />
 											</NumberInputStepper>
 										</NumberInput>
+
+										<Alert mt="20px" status={isBuy ? 'info' : 'warning'}>
+											<AlertIcon />
+											You could {isBuy ? 'purchase' : 'sell'} up to{' '}
+											{allowQuantity} coins!
+										</Alert>
+
 										<Text mt="100px" fontWeight="bold" borderTopWidth="1px">
 											Order Info
 										</Text>
 										<Flex justifyContent="space-between">
 											<Text mt="5px">Trade Value</Text>
 											<Text mt="5px" ml="0px">
-												$10523
+												${currencyFormat(inputQuantity * price)}
+											</Text>
+										</Flex>
+										<Flex justifyContent="space-between">
+											<Text mt="5px">Remain Balance</Text>
+											<Text mt="5px" ml="0px">
+												$
+												{isBuy
+													? currencyFormat(
+															currentBalance - inputQuantity * price
+													  )
+													: currencyFormat(
+															currentBalance + inputQuantity * price
+													  )}
 											</Text>
 										</Flex>
 									</TabPanel>
@@ -245,11 +297,20 @@ function CoinDisplay({
 								Cancel
 							</Button>
 							<Button
-								backgroundColor={isActive ? '#1E88E5' : '#EF5350'}
+								backgroundColor={isBuy ? '#1E88E5' : '#EF5350'}
 								variant="solid"
+								onClick={() => setActivate(true)}
 							>
 								Submit Order
 							</Button>
+							<Update
+								activate={activate}
+								isBuy={isBuy}
+								inputQuantity={inputQuantity}
+								currentBalance={currentBalance}
+								currentPrice={price}
+								id={id}
+							/>
 						</DrawerFooter>
 					</DrawerContent>
 				</DrawerOverlay>
