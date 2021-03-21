@@ -1,17 +1,18 @@
 import React from 'react';
-import { useColorMode } from '@chakra-ui/color-mode';
 import { Box } from '@chakra-ui/layout';
 import { Flex } from '@chakra-ui/layout';
 import { Text } from '@chakra-ui/layout';
 import { Stat } from '@chakra-ui/stat';
 import { StatNumber } from '@chakra-ui/stat';
+import { useSelector } from 'react-redux';
+import { selectHovertheme } from './features/hoverthemeSlice';
 
 function currencyFormat(num) {
 	return num?.toFixed(1).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 }
 
 function FeatureBox({ Icon, name, value, percent }) {
-	const { colorMode, toggleColorMode } = useColorMode();
+	const hoverTheme = useSelector(selectHovertheme);
 
 	return (
 		<>
@@ -22,25 +23,14 @@ function FeatureBox({ Icon, name, value, percent }) {
 				borderWidth="1px"
 				borderRadius="lg"
 				overflow="hidden"
-				_hover={
-					colorMode === 'dark'
-						? {
-								fontWeight: 'bold',
-								backgroundColor: '#606770',
-						  }
-						: {
-								fontWeight: 'bold',
-								backgroundColor: '#F2F2F2',
-								opacity: '0.8',
-						  }
-				}
+				_hover={hoverTheme}
 			>
-				<Flex justifyContent="center" >
+				<Flex justifyContent="center">
 					<Text fontSize="lg" fontWeight="500" mr="5px">
 						{name}
 					</Text>
-
-					{Icon && <Icon />}  {/*<Icon/> is Material UI component (not Chakra UI comp) */}
+					{Icon && <Icon />}{' '}
+					{/*<Icon/> is Material UI component (not Chakra UI comp) */}
 				</Flex>
 
 				{!percent ? (

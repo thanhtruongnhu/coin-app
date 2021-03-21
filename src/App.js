@@ -5,9 +5,27 @@ import Header from './Header';
 import { AnimatePresence, motion } from 'framer-motion';
 import PortFolio from './PortFolio';
 import Sidebar from './Sidebar';
+import { useColorMode } from '@chakra-ui/color-mode';
+import { useDispatch } from 'react-redux';
+import { dark, light } from './features/hoverthemeSlice';
+import { useEffect } from 'react';
 
 function App() {
 	const location = useLocation();
+	const { colorMode, toggleColorMode } = useColorMode();
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		/*this is a state Listener. also firebase save the data into the local cookies for your next time sign in */
+		if (colorMode === 'dark') {
+			dispatch(dark());
+		} else {
+			dispatch(light());
+		}
+	}, [colorMode, dispatch]);
+	// (colorMode === 'dark')
+	// 	? dispatch(dark)
+	// 	: dispatch(light);
 
 	const pageVariants = {
 		in: {
@@ -25,9 +43,8 @@ function App() {
 	};
 
 	return (
-		<div className="App">
+		<>
 			<Header />
-			{/* Box: d="flex" */}
 			<Flex>
 				<Sidebar />
 				<AnimatePresence exitBeforeEnter>
@@ -60,7 +77,7 @@ function App() {
 								animate="in"
 								exit="out"
 								variants={pageVariants}
-								transition={{ duration: 0.65}}
+								transition={{ duration: 0.65 }}
 							>
 								<PortFolio />
 							</motion.div>
@@ -74,7 +91,7 @@ function App() {
 
 			{/* Switch: LoginScreen */}
 			{/* Switch: Chat Channels */}
-		</div>
+		</>
 	);
 }
 

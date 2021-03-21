@@ -1,13 +1,13 @@
-import { Heading } from '@chakra-ui/layout';
 import { Text } from '@chakra-ui/layout';
 import { Box } from '@chakra-ui/layout';
 import React from 'react';
 import Icon from '@chakra-ui/icon';
-import { useColorMode } from '@chakra-ui/color-mode';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectHovertheme } from './features/hoverthemeSlice';
 
 function SidebarOption({ Img, title, id }) {
-	const { colorMode, toggleColorMode } = useColorMode();
+	const hoverTheme = useSelector(selectHovertheme);
 	const history = useHistory();
 	const selectChannel = () => {
 		if (id) {
@@ -28,18 +28,7 @@ function SidebarOption({ Img, title, id }) {
 			fontWeight="500"
 			h="8"
 			onClick={selectChannel}
-			_hover={
-				colorMode === 'dark'
-					? {
-							fontWeight: 'bold',
-							backgroundColor: '#606770',
-					  }
-					: {
-							fontWeight: 'bold',
-							backgroundColor: '#F2F2F2',
-							opacity: '0.8',
-					  }
-			}
+			_hover={hoverTheme}
 		>
 			{/*ICON*/}
 			{Img && <Icon as={Img} pr="1" />}

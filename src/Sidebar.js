@@ -1,6 +1,5 @@
 import Icon from '@chakra-ui/icon';
-import { CheckCircleIcon, StarIcon } from '@chakra-ui/icons';
-
+import { CheckCircleIcon} from '@chakra-ui/icons';
 import { Divider } from '@chakra-ui/layout';
 import { Box, Flex, Text } from '@chakra-ui/layout';
 import React from 'react';
