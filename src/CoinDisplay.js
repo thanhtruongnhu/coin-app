@@ -1,8 +1,21 @@
 import { Image } from '@chakra-ui/image';
 import { Box, Text } from '@chakra-ui/layout';
 import { Stat, StatArrow, StatHelpText, StatNumber } from '@chakra-ui/stat';
-import React from 'react';
-import PurchaseDrawer from './PurchaseDrawer';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectHovertheme } from './features/hoverthemeSlice';
+import {
+	Drawer,
+	DrawerBody,
+	DrawerCloseButton,
+	DrawerContent,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerOverlay,
+} from '@chakra-ui/modal';
+import { Input } from '@chakra-ui/input';
+import { Button } from '@chakra-ui/button';
+import { useDisclosure } from '@chakra-ui/hooks';
 
 function currencyFormat(num) {
 	return num.toFixed(1).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
@@ -27,6 +40,11 @@ function CoinDisplay({
 	gainPercentage,
 	gain,
 }) {
+	const hoverTheme = useSelector(selectHovertheme);
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const btnRef = React.useRef();
+
+
 	return (
 		<>
 			<Box
@@ -42,9 +60,12 @@ function CoinDisplay({
 				// transform="translate(-50%, -50%)"
 				ml="auto"
 				mr="auto"
+				_hover={hoverTheme}
+				ref={btnRef}
+				onClick={onOpen}
 			>
-				<Box d="flex" alignItems="center" minW="250px">
-					<Image src={image} alt="crypto" h="30px" w="30px" mr="10px" />
+				<Box d="flex" alignItems="center" minW="250px" >
+					<Image src={image} alt="crypto" h="30px" w="30px" mr="10px" ml="10px" />
 					<Text fontSize="16px" w="100px" mr="30px">
 						{name}
 					</Text>
@@ -56,11 +77,11 @@ function CoinDisplay({
 				<Box
 					d="flex"
 					alignItems="center"
-					minW="400px"
+					minW="410px"
 					textAlign="right"
 					justifyContent="space-between"
 				>
-					<Box w="73px"> {Converter(dateBought)}</Box>
+					<Box w="79px"> {Converter(dateBought)}</Box>
 					<Box w="65px">{quantity}</Box>
 					<Box w="75px">${currencyFormat(priceBought)}</Box>
 					<Box w="75px">${currencyFormat(price)}</Box>
@@ -99,8 +120,32 @@ function CoinDisplay({
 					</Stat>
 				</Box>
 			</Box>
-			<PurchaseDrawer />
+			{/* <Drawer
+				isOpen={isOpen}
+				placement="right"
+				onClose={onClose}
+				finalFocusRef={btnRef}
+			>
+				<DrawerOverlay>
+					<DrawerContent>
+						<DrawerCloseButton />
+						<DrawerHeader>Create your account</DrawerHeader>
+
+						<DrawerBody>
+							<Input placeholder="Type here..." />
+						</DrawerBody>
+
+						<DrawerFooter borderTopWidth="1px">
+							<Button variant="outline" mr={3} onClick={onClose}>
+								Cancel
+							</Button>
+							<Button color="blue">Save</Button>
+						</DrawerFooter>
+					</DrawerContent>
+				</DrawerOverlay>
+			</Drawer> */}
 		</>
+		
 	);
 }
 

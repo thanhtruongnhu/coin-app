@@ -10,7 +10,7 @@ import { update } from './features/tickerSlice';
 import { selectUser } from './features/userSlice';
 import db from './firebase';
 import TitleBar from './TitleBar';
-
+import { motion } from 'framer-motion';
 
 function PortFolio() {
 	const user = useSelector(selectUser);
@@ -18,7 +18,7 @@ function PortFolio() {
 	const [coinsApi, setCoinsApi] = useState([]);
 	const [coins, setCoins] = useState([]);
 	const [coinlist, setCoinlist] = useState([]);
-
+	const MotionBox = motion(Box);
 
 	// 1. Pull data from Google Auth
 	// <Not yet implement>
@@ -94,8 +94,15 @@ function PortFolio() {
 	console.log(coinsApi);
 
 	return (
-		<Box flex="0.7" py="20px" mx="20px" textAlign="center">
-			
+		<MotionBox
+			flex="0.7"
+			py="20px"
+			mx="20px"
+			textAlign="center"
+			initial={{opacity: 0}}
+			animate={{opacity: 1}}
+			exit={{opacity: 0}}
+		>
 			<FeatureRow />
 			<TitleBar />
 			{coinsApi.map((coin) => {
@@ -119,7 +126,7 @@ function PortFolio() {
 			})}
 
 			<DonutChart />
-		</Box>
+		</MotionBox>
 	);
 }
 
