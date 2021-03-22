@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { assign } from './features/balanceSlice';
+import { assign, selectBalance } from './features/balanceSlice';
 import { selectTicker, update } from './features/tickerSlice';
 import { selectUser } from './features/userSlice';
 import db from './firebase';
@@ -17,12 +17,22 @@ function Update({
 	const dispatch = useDispatch();
 	const user = useSelector(selectUser);
 	const ticker = useSelector(selectTicker);
+	const balance = useSelector(selectBalance);
 
 	useEffect(() => {
+		// var init = ticker.filter((coin) => coin.id === id)[0];
+		// var arr = { ...init };
+		// arr.quantity = 1000;
+		// arr.priceBought = 1000;
+
+		// console.log(arr);
+
 		if (activate) {
 			var ref = db.collection('user').doc(user.email);
 			var newBalance = null;
-			let Coin = ticker.filter((coin) => coin.id === id)[0];
+			var Coin = ticker.filter((coin) => coin.id === id)[0];
+			Coin = { ...Coin };
+
 			var newTicker = ticker;
 			newTicker = newTicker.filter((obj) => obj.id !== id); // Delete ticker
 
@@ -39,10 +49,12 @@ function Update({
 			if (isBuy) {
 				newBalance = currentBalance - inputQuantity * currentPrice;
 				dispatch(assign(newBalance));
-				Coin.quantity = Coin.quantity + inputQuantity;
+				Coin.quantity = Number(Coin.quantity) + Number(inputQuantity);
 				Coin.priceBought =
 					(Coin.priceBought * Coin.quantity + currentPrice * inputQuantity) /
-					(Coin.quantity + inputQuantity);
+					(Number(Coin.quantity) + Number(inputQuantity));
+				console.log( Coin.quantity);
+                console.log(  Coin.priceBought);
 			} else {
 				newBalance = currentBalance + inputQuantity * currentPrice;
 				dispatch(assign(newBalance));
@@ -60,7 +72,10 @@ function Update({
 				});
 
 			if (Coin.quantity !== 0) {
+				console.log('INSIDE');
 				ref
+					.collection('tickers')
+					.doc(id)
 					.update({ quantity: Coin.quantity, price_bought: Coin.priceBought })
 					.then(() => {
 						console.log('Balance successfully updated!');
@@ -74,6 +89,8 @@ function Update({
 			} else {
 				// if coin.quantity === 0 {delete document}
 				ref
+					.collection('tickers')
+					.doc(id)
 					.update({
 						quantity: firebase.firestore.FieldValue.delete(),
 						price_bought: firebase.firestore.FieldValue.delete(),
@@ -95,6 +112,8 @@ function Update({
 		// 	cleanup;
 		// };
 	}, [dispatch, activate]);
+
+	// console.log(Coin);
 
 	return <>{!activate ? <></> : <>wrtwerwe</>}</>;
 }

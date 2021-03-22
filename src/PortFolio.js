@@ -6,7 +6,7 @@ import DonutChart from './DonutChart';
 import CoinDisplay from './CoinDisplay';
 import FeatureRow from './FeatureRow';
 import { selectBalance, assign } from './features/balanceSlice';
-import { update } from './features/tickerSlice';
+import { selectTicker, update } from './features/tickerSlice';
 import { selectUser } from './features/userSlice';
 import db from './firebase';
 import TitleBar from './TitleBar';
@@ -94,15 +94,15 @@ function PortFolio() {
 	console.log(coinsApi);
 
 	return (
-		<MotionBox
+		<Box
 			flex="0.7"
 			py="20px"
 			mx="20px"
 			textAlign="center"
-			initial={{opacity: 0}}
-			animate={{opacity: 1}}
-			exit={{opacity: 0}}
-			transition={{duration: 0.5}}
+			// initial={{ opacity: 0 }}
+			// animate={{ opacity: 1 }}
+			// exit={{ opacity: 0 }}
+			// transition={{ duration: 0.5 }}
 		>
 			<FeatureRow />
 			<TitleBar />
@@ -128,7 +128,7 @@ function PortFolio() {
 			})}
 
 			<DonutChart />
-		</MotionBox>
+		</Box>
 	);
 }
 
