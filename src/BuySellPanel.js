@@ -1,6 +1,6 @@
 import { Alert, AlertIcon } from '@chakra-ui/alert';
 import { Button } from '@chakra-ui/button';
-import { Box, Flex, Text } from '@chakra-ui/layout';
+import { Box, Flex, Heading, Text } from '@chakra-ui/layout';
 import {
 	NumberDecrementStepper,
 	NumberIncrementStepper,
@@ -13,12 +13,13 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectBalance } from './features/balanceSlice';
+import Update from './Update';
 
 function currencyFormat(num) {
 	return num.toFixed(1).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 }
 
-function BuySellPanel({ price, quantity }) {
+function BuySellPanel({ name, price, quantity, id }) {
 	const balance = useSelector(selectBalance);
 	const [isBuy, setIsBuy] = useState(true);
 	const parse = (val) => val.replace(/^\$/, '');
@@ -43,8 +44,11 @@ function BuySellPanel({ price, quantity }) {
 	}, [balance, isBuy, price, quantity]);
 
 	return (
-		<Box d="flex" flex="0.3" >
-			<Box borderLeftWidth="1px" >
+		<Box d="flex" flex="0.3" borderLeftWidth="1px" minH="700px">
+			<Box minW="342.45px" px="15px">
+				<Heading fontSize={20} fontWeight="500" my="20px">
+					{name}
+				</Heading>
 				<Flex justifyContent="space-between">
 					<Button
 						flex="0.5"
@@ -110,7 +114,7 @@ function BuySellPanel({ price, quantity }) {
 
 							<Alert mt="20px" status={isBuy ? 'info' : 'warning'}>
 								<AlertIcon />
-								You could {isBuy ? 'purchase' : 'sell'} up to {allowQuantity}{' '}
+								You could {isBuy ? 'buy' : 'sell'} up to {allowQuantity}{' '}
 								coins!
 							</Alert>
 
@@ -150,6 +154,24 @@ function BuySellPanel({ price, quantity }) {
 						</TabPanel>
 					</TabPanels>
 				</Tabs>
+				<Button
+					mt="20"
+					h="60px"
+					w="100%"
+					backgroundColor={isBuy ? '#1E88E5' : '#EF5350'}
+					variant="solid"
+					onClick={() => setActivate(true)}
+				>
+					Submit Order
+				</Button>
+				<Update
+					activate={activate}
+					isBuy={isBuy}
+					inputQuantity={inputQuantity}
+					currentBalance={currentBalance}
+					currentPrice={price}
+					id={id}
+				/>
 			</Box>
 		</Box>
 	);

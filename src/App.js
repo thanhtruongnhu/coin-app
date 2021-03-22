@@ -28,7 +28,10 @@ function App() {
 	return (
 		<>
 			<Header />
-			<Box d="flex" h="100vh">
+			<Box d="flex"
+			 h="100vh" 
+			//  h="100%"
+			 >
 				<Sidebar />
 				<AnimatePresence exitBeforeEnter>
 					<Switch location={location} key={location.pathname}>

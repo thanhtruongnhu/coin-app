@@ -4,7 +4,7 @@ import React from 'react'
 function ChartPanel() {
     return (
         <Box d="flex" flex="0.7" >
-            sdsdsd
+            This is an interactive chart
         </Box>
     )
 }
