@@ -9,6 +9,7 @@ import { useColorMode } from '@chakra-ui/color-mode';
 import { useDispatch } from 'react-redux';
 import { dark, light } from './features/hoverthemeSlice';
 import { useEffect } from 'react';
+import Chart from './Chart';
 
 function App() {
 	const location = useLocation();
@@ -27,12 +28,14 @@ function App() {
 	return (
 		<>
 			<Header />
-			<Flex>
+			<Box d="flex" h="100vh">
 				<Sidebar />
 				<AnimatePresence exitBeforeEnter>
 					<Switch location={location} key={location.pathname}>
 						<Route path="/TopCrypto">TOP CRYPTO</Route>
-						<Route path="/Chart">CHART</Route>
+						<Route path="/Chart">
+							<Chart />
+						</Route>
 						<Route path="/PortFolio">
 							<PortFolio />
 						</Route>
@@ -41,7 +44,7 @@ function App() {
 						</Route>
 					</Switch>
 				</AnimatePresence>
-			</Flex>
+			</Box>
 
 			{/* Switch: LoginScreen */}
 			{/* Switch: Chat Channels */}

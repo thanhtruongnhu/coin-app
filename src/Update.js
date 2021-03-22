@@ -17,16 +17,8 @@ function Update({
 	const dispatch = useDispatch();
 	const user = useSelector(selectUser);
 	const ticker = useSelector(selectTicker);
-	const balance = useSelector(selectBalance);
 
 	useEffect(() => {
-		// var init = ticker.filter((coin) => coin.id === id)[0];
-		// var arr = { ...init };
-		// arr.quantity = 1000;
-		// arr.priceBought = 1000;
-
-		// console.log(arr);
-
 		if (activate) {
 			var ref = db.collection('user').doc(user.email);
 			var newBalance = null;
@@ -36,16 +28,6 @@ function Update({
 			var newTicker = ticker;
 			newTicker = newTicker.filter((obj) => obj.id !== id); // Delete ticker
 
-			// newTicker.forEach(function (item) {
-			//     if (item.id === id) {
-			//         item.quantity = 1000;
-			//         item.priceBought = 1000;
-			//         return;
-			//     }
-			// });
-
-			// console.log(newTicker)
-
 			if (isBuy) {
 				newBalance = currentBalance - inputQuantity * currentPrice;
 				dispatch(assign(newBalance));
@@ -53,8 +35,6 @@ function Update({
 				Coin.priceBought =
 					(Coin.priceBought * Coin.quantity + currentPrice * inputQuantity) /
 					(Number(Coin.quantity) + Number(inputQuantity));
-				console.log( Coin.quantity);
-                console.log(  Coin.priceBought);
 			} else {
 				newBalance = currentBalance + inputQuantity * currentPrice;
 				dispatch(assign(newBalance));
@@ -72,7 +52,6 @@ function Update({
 				});
 
 			if (Coin.quantity !== 0) {
-				console.log('INSIDE');
 				ref
 					.collection('tickers')
 					.doc(id)

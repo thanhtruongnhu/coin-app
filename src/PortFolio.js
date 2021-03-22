@@ -95,7 +95,7 @@ function PortFolio() {
 
 	return (
 		<Box
-			flex="0.7"
+			flex="1"
 			py="20px"
 			mx="20px"
 			textAlign="center"
