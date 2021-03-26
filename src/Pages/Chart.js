@@ -1,7 +1,7 @@
 import { Box, Flex, Spacer } from '@chakra-ui/layout';
 import React from 'react';
-import BuySellPanel from './BuySellPanel';
-import ChartPanel from './ChartPanel';
+import BuySellPanel from '../BuySellPanel';
+import ChartPanel from '../ChartPanel';
 
 function Chart() {
 	return (

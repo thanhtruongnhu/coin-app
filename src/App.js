@@ -3,13 +3,14 @@ import { Box, Flex } from '@chakra-ui/layout';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import Header from './Header';
 import { AnimatePresence } from 'framer-motion';
-import PortFolio from './PortFolio';
+import PortFolio from './Pages/PortFolio';
 import Sidebar from './Sidebar';
 import { useColorMode } from '@chakra-ui/color-mode';
 import { useDispatch } from 'react-redux';
 import { dark, light } from './features/hoverthemeSlice';
 import { useEffect } from 'react';
-import Chart from './Chart';
+import Chart from './Pages/Chart';
+import TopCryp from './Pages/TopCryp';
 
 function App() {
 	const location = useLocation();
@@ -28,14 +29,17 @@ function App() {
 	return (
 		<>
 			<Header />
-			<Box d="flex"
-			 h="100vh" 
-			//  h="100%"
-			 >
+			<Box
+				d="flex"
+				h="100vh"
+				//  h="100%"
+			>
 				<Sidebar />
 				<AnimatePresence exitBeforeEnter>
 					<Switch location={location} key={location.pathname}>
-						<Route path="/TopCrypto">TOP CRYPTO</Route>
+						<Route path="/TopCrypto">
+							<TopCryp />
+						</Route>
 						<Route path="/Chart">
 							<Chart />
 						</Route>

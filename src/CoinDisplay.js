@@ -29,6 +29,7 @@ import {
 import { useColorMode } from '@chakra-ui/color-mode';
 import { selectBalance } from './features/balanceSlice';
 import Update from './Update';
+import DrawerOld from './old/DrawerOld';
 
 function currencyFormat(num) {
 	return num.toFixed(1).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
@@ -167,7 +168,7 @@ function CoinDisplay({
 					</Stat>
 				</Box>
 			</Box>
-			<Drawer
+			<Drawer 
 				isOpen={isOpen}
 				placement="right"
 				onClose={onClose}
@@ -310,6 +311,7 @@ function CoinDisplay({
 								currentBalance={currentBalance}
 								currentPrice={price}
 								id={id}
+								name={name}
 							/>
 						</DrawerFooter>
 					</DrawerContent>

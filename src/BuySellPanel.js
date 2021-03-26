@@ -171,6 +171,7 @@ function BuySellPanel({ name, price, quantity, id }) {
 					currentBalance={currentBalance}
 					currentPrice={price}
 					id={id}
+                    name={name}
 				/>
 			</Box>
 		</Box>

@@ -5,6 +5,7 @@ import { selectTicker, update } from './features/tickerSlice';
 import { selectUser } from './features/userSlice';
 import db from './firebase';
 import firebase from 'firebase';
+import { createStandaloneToast } from '@chakra-ui/toast';
 
 function Update({
 	activate,
@@ -13,10 +14,12 @@ function Update({
 	currentBalance,
 	currentPrice,
 	id,
+    name,
 }) {
 	const dispatch = useDispatch();
 	const user = useSelector(selectUser);
 	const ticker = useSelector(selectTicker);
+	const toast = createStandaloneToast();
 
 	useEffect(() => {
 		if (activate) {
@@ -94,7 +97,29 @@ function Update({
 
 	// console.log(Coin);
 
-	return <>{!activate ? <></> : <>wrtwerwe</>}</>;
+	return (
+		<>
+			{!activate ? (
+				<></>
+			) : isBuy ? (
+				toast({
+					title: 'Your order has been filled!',
+					description: `Bought ${inputQuantity} ${name} coins `,
+					status: 'success',
+					
+					isClosable: true,
+				})
+			) : (
+				toast({
+					title: 'Your order has been filled!',
+					description: `Sold ${inputQuantity} ${name} coins`,
+					status: 'info',
+					
+					isClosable: true,
+				})
+			)}
+		</>
+	);
 }
 
 export default Update;
