@@ -2,14 +2,14 @@ import { Box } from '@material-ui/core';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import DonutChart from '../DonutChart';
-import CoinDisplay from '../CoinDisplay';
-import FeatureRow from '../FeatureRow';
+import DonutChart from '../Port Folio/DonutChart';
+import CoinDisplay from '../Port Folio/CoinDisplay';
+import FeatureRow from '../Port Folio/FeatureRow';
 import { selectBalance, assign } from '../features/balanceSlice';
 import { selectTicker, update } from '../features/tickerSlice';
 import { selectUser } from '../features/userSlice';
 import db from '../firebase';
-import TitleBar from '../TitleBar';
+import TitleBar from '../Port Folio/TitleBar';
 import { motion } from 'framer-motion';
 
 function PortFolio() {

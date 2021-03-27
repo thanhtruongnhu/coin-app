@@ -12,8 +12,8 @@ import { Progress } from '@chakra-ui/progress';
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectBalance } from './features/balanceSlice';
-import Update from './Update';
+import { selectBalance } from '../features/balanceSlice';
+import Update from '../Update';
 
 function currencyFormat(num) {
 	return num.toFixed(1).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');

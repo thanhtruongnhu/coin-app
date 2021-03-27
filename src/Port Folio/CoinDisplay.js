@@ -3,7 +3,7 @@ import { Box, Flex, Heading, Kbd, Text } from '@chakra-ui/layout';
 import { Stat, StatArrow, StatHelpText, StatNumber } from '@chakra-ui/stat';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectHovertheme } from './features/hoverthemeSlice';
+import { selectHovertheme } from '../features/hoverthemeSlice';
 import {
 	Drawer,
 	DrawerBody,
@@ -27,9 +27,9 @@ import {
 	NumberInputStepper,
 } from '@chakra-ui/number-input';
 import { useColorMode } from '@chakra-ui/color-mode';
-import { selectBalance } from './features/balanceSlice';
-import Update from './Update';
-import DrawerOld from './old/DrawerOld';
+import { selectBalance } from '../features/balanceSlice';
+import Update from '../Update';
+import DrawerOld from '../old/DrawerOld';
 
 function currencyFormat(num) {
 	return num.toFixed(1).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');

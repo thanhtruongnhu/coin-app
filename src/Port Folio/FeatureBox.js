@@ -5,7 +5,7 @@ import { Text } from '@chakra-ui/layout';
 import { Stat } from '@chakra-ui/stat';
 import { StatNumber } from '@chakra-ui/stat';
 import { useSelector } from 'react-redux';
-import { selectHovertheme } from './features/hoverthemeSlice';
+import { selectHovertheme } from '../features/hoverthemeSlice';
 
 function currencyFormat(num) {
 	return num?.toFixed(1).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');

@@ -26,10 +26,9 @@ function TrendingRow() {
 			<div className="row__posters">
 				{/* <Flex overflowY="hidden" overflowX="scroll" p="20px"> */}
 				{trendCoin.map((coin) => (
-					<Tooltip label={coin?.name} fontSize="md">
+					<Tooltip key={coin.id} label={coin?.name} fontSize="md">
 						<Image
 							src={coin?.image}
-							key={coin.id}
 							alt="crypto"
 							maxH="150px"
 							_hover={{

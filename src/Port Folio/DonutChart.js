@@ -5,7 +5,7 @@ import { SkeletonCircle } from '@chakra-ui/skeleton';
 import React, { useEffect, useState } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
-import { selectTicker } from './features/tickerSlice';
+import { selectTicker } from '../features/tickerSlice';
 
 function DonutChart() {
 	const { colorMode, toggleColorMode } = useColorMode();
