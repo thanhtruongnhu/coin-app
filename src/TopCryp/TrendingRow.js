@@ -2,6 +2,7 @@ import { Image } from '@chakra-ui/image';
 import { Flex } from '@chakra-ui/layout';
 import { Box } from '@chakra-ui/layout';
 import { Heading } from '@chakra-ui/layout';
+import { Tooltip } from '@chakra-ui/tooltip';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import requests from '../Request';
@@ -20,11 +21,12 @@ function TrendingRow() {
 	}, []);
 
 	return (
-		<Box pt="20px" >
+		<Box pt="20px">
 			<Heading ml="20px">Top Trending</Heading>
 			<div className="row__posters">
 				{/* <Flex overflowY="hidden" overflowX="scroll" p="20px"> */}
-					{trendCoin.map((coin) => (
+				{trendCoin.map((coin) => (
+					<Tooltip label={coin?.name} fontSize="md">
 						<Image
 							src={coin?.image}
 							key={coin.id}
@@ -40,7 +42,8 @@ function TrendingRow() {
 							transition="transform 450ms"
 							borderRadius="full"
 						/>
-					))}
+					</Tooltip>
+				))}
 				{/* </Flex> */}
 			</div>
 		</Box>
