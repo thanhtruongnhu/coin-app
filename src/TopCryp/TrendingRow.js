@@ -5,9 +5,9 @@ import { Heading } from '@chakra-ui/layout';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import requests from '../Request';
-import './Row.css';
+import './TrendingRow.css';
 
-function Row() {
+function TrendingRow() {
 	const [trendCoin, setTrendCoin] = useState([]);
 
 	useEffect(() => {
@@ -20,8 +20,8 @@ function Row() {
 	}, []);
 
 	return (
-		<Box mt="20px" ml="20px">
-			<Heading>Top Trending</Heading>
+		<Box pt="20px" >
+			<Heading ml="20px">Top Trending</Heading>
 			<div className="row__posters">
 				{/* <Flex overflowY="hidden" overflowX="scroll" p="20px"> */}
 					{trendCoin.map((coin) => (
@@ -47,4 +47,4 @@ function Row() {
 	);
 }
 
-export default Row;
+export default TrendingRow;
