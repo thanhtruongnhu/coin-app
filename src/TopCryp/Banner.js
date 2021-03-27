@@ -5,20 +5,21 @@ import { Flex } from '@chakra-ui/layout';
 import { Box } from '@chakra-ui/layout';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import requests from '../Request';
 
 function Banner() {
 	const [topCoin, setTopCoin] = useState([]);
 
 	useEffect(() => {
 		axios
-			.get(`https://api.coingecko.com/api/v3/search/trending`)
+			.get(requests.fetchTopCoins)
 			.then((res) => {
 				setTopCoin(res.data.coins[0].item);
 			})
 			.catch((error) => console.log(error));
 	}, []);
 
-	console.log(topCoin)
+	// console.log(topCoin)
 	return (
 		<>
 			<Box
@@ -31,12 +32,12 @@ function Banner() {
 				bgPosition="center center"
 			>
 				<LinkBox ml="130px" pt="120px" h="10px">
-					<Box fontSize="1.5rem" fontWeight="600" pb="0.3rem">
+					<Box fontSize="1.75rem" fontWeight="600" pb="0.3rem" ml="10px">
 						COIN OF THE DAY
 					</Box>
 					<Flex alignItems="center">
 						<Image
-							src="https://dkhpfm5hits1w.cloudfront.net/zilliqa.png"
+							src={topCoin?.large}
 							alt="crypto"
 							h="60px"
 							w="60px"
