@@ -16,7 +16,7 @@ import { Switch } from '@chakra-ui/switch';
 import { Tag, TagLabel } from '@chakra-ui/tag';
 import React from 'react';
 
-function Header2() {
+function Header() {
 	const { colorMode, toggleColorMode } = useColorMode();
 
 	return (
@@ -29,7 +29,7 @@ function Header2() {
 			<Spacer />
 
 			{/* <FormControl display="flex" alignItems="center" m="3"> */}
-			<Box display="flex" alignItems="center">
+			{/* <Box display="flex" alignItems="center">
 				<FormLabel htmlFor="dark-toggle" pt="1">
 					Dark mode
 				</FormLabel>
@@ -40,7 +40,7 @@ function Header2() {
 					onChange={toggleColorMode}
 					isChecked={colorMode === 'dark' ? true : false}
 				></Switch>
-			</Box>
+			</Box> */}
 
 			<Tag size="lg" borderRadius="full" m="3">
 				<Avatar
@@ -57,4 +57,4 @@ function Header2() {
 	);
 }
 
-export default Header2;
+export default Header;

@@ -16,6 +16,7 @@
     "axios": "^0.21.1",
     "chart.js": "^2.9.4",
     "firebase": "^8.3.0",
+    "formik": "^2.2.6",
     "framer-motion": "3.10.6",
     "react": "^17.0.1",
     "react-chartjs-2": "^2.11.1",

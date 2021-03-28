@@ -42,6 +42,7 @@ function Banner() {
 							h="60px"
 							w="60px"
 							mr="10px"
+							borderRadius="full"
 						/>
 						<Box
 							fontSize="3rem"

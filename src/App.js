@@ -11,6 +11,7 @@ import { dark, light } from './features/hoverthemeSlice';
 import { useEffect } from 'react';
 import Chart from './Pages/Chart';
 import TopCryp from './Pages/TopCryp';
+import Chat from './Chat/Chat';
 
 function App() {
 	const location = useLocation();
@@ -45,6 +46,9 @@ function App() {
 						</Route>
 						<Route path="/PortFolio">
 							<PortFolio />
+						</Route>
+						<Route path="/:roomId">
+							<Chat />
 						</Route>
 						<Route exact path="/">
 							<PortFolio />
