@@ -6,7 +6,7 @@ import ChartPanel from '../Chart/ChartPanel';
 function Chart() {
 	return (
 		<Box d="flex" flex="0.7" 
-        // justifyContent="space-between" 
+        justifyContent="space-between" 
         // ml="auto" 
         // mr="auto"
         flexGrow="1"

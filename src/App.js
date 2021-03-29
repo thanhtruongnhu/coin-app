@@ -12,6 +12,9 @@ import { useEffect } from 'react';
 import Chart from './Pages/Chart';
 import TopCryp from './Pages/TopCryp';
 import Chat from './Chat/Chat';
+import axios from 'axios';
+import requests from './Request';
+import { update } from './features/allCoinSlice';
 
 function App() {
 	const location = useLocation();
@@ -19,13 +22,41 @@ function App() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		/*this is a state Listener. also firebase save the data into the local cookies for your next time sign in */
 		if (colorMode === 'dark') {
 			dispatch(dark());
 		} else {
 			dispatch(light());
 		}
 	}, [colorMode, dispatch]);
+
+	useEffect(() => {
+		function edit(coinapi) {
+			let newCoin = {
+				value: coinapi.symbol,
+				label: coinapi.name,
+			};
+			let coin = Object.assign(coinapi, newCoin);
+			return coin;
+		}
+
+		axios
+			.get(requests.fetchAllCoins)
+			.then((res) => {
+				dispatch(update(res.data.data.slice(0, 200).map((coin) => edit(coin))));
+				// console.log(res.data.data.slice(0, 200));
+			})
+			.catch((error) => console.log(error));
+	}, [dispatch]);
+
+	// useEffect(() => {
+	// 	axios
+	// 		.get(requests.fetchAllCoins)
+	// 		.then((res) => {
+	// 			dispatch(update(res.data.data.slice(0, 200)));
+	// 			console.log(res.data.data.slice(0, 200));
+	// 		})
+	// 		.catch((error) => console.log(error));
+	// }, []);
 
 	return (
 		<>

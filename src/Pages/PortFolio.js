@@ -24,7 +24,7 @@ function PortFolio() {
 	// <Not yet implement>
 
 	// 2. Pull Firebase database & Find the user info using Auth data (email), then get the portfolio
-
+	
 	useEffect(() => {
 		if (user.email) {
 			db.collection('user')
@@ -91,7 +91,7 @@ function PortFolio() {
 	}, [coinlist, coins, coinsApi, dispatch]);
 
 	// console.log(coins);
-	console.log(coinsApi);
+	// console.log(coinsApi);
 
 	return (
 		<Box

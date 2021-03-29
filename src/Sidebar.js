@@ -48,7 +48,7 @@ function Sidebar() {
 				>
 					Main Board
 				</Box>
-				<Flex alignItems="center" pl="3" py="1">
+				<Flex alignItems="center" pl="3" py="1" mb="5px">
 					<Icon as={CheckCircleIcon} color="green.500" pr="1" />
 					<Text fontWeight="400" fontSize="13px">
 						Kyle Nhu
@@ -63,6 +63,7 @@ function Sidebar() {
 				{/*Use capital "I" in Icon becuz, we passing a component as a prop*/}
 				<SidebarOption Img={AssessmentIcon} title="Chart" id="Chart" />
 				<SidebarOption Img={FolderOpenIcon} title="Port Folio" id="PortFolio" />
+				<Box h="10px"></Box>
 				<Accordion allowToggle>
 					<AccordionItem>
 						{/* <h2> */}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { assign, selectBalance } from './features/balanceSlice';
 import { selectTicker, update } from './features/tickerSlice';
@@ -14,7 +14,7 @@ function Update({
 	currentBalance,
 	currentPrice,
 	id,
-    name,
+	name,
 }) {
 	const dispatch = useDispatch();
 	const user = useSelector(selectUser);
@@ -91,7 +91,7 @@ function Update({
 			dispatch(update(newTicker));
 		}
 		// return () => {
-		// 	cleanup;
+		// 	setToastTrigger(false);
 		// };
 	}, [dispatch, activate]);
 
@@ -106,7 +106,6 @@ function Update({
 					title: 'Your order has been filled!',
 					description: `Bought ${inputQuantity} ${name} coins `,
 					status: 'success',
-					
 					isClosable: true,
 				})
 			) : (
@@ -114,7 +113,6 @@ function Update({
 					title: 'Your order has been filled!',
 					description: `Sold ${inputQuantity} ${name} coins`,
 					status: 'info',
-					
 					isClosable: true,
 				})
 			)}

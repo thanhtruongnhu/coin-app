@@ -4,7 +4,7 @@ import { InfoOutlined, StarBorderOutlined } from '@material-ui/icons';
 import db from '../firebase';
 import Message from './Message';
 import ChatInput from './ChatInput';
-import { Box, Flex, Spacer, Text } from '@chakra-ui/layout';
+import { Box, Divider, Flex, Spacer, Text } from '@chakra-ui/layout';
 import Icon from '@chakra-ui/icon';
 
 function Chat() {
@@ -49,7 +49,7 @@ function Chat() {
 					alignItems="center"
 					justifyContent="space-between"
 					p="20px"
-					borderBottom="1px solid lightgray"
+					
 				>
 					<Box d="flex">
 						<Text d="flex" textTransform="lowercase" alignItems="center">
@@ -61,7 +61,8 @@ function Chat() {
 					<Icon as={InfoOutlined} ml="10px" fontSize="18px" />
 					<Text>Details</Text>
 				</Flex>
-                <Box>
+				<Divider />
+				<Box>
 					{roomMessages.map(({ message, timestamp, user, userImage }) => (
 						<Message
 							message={message}
@@ -71,14 +72,10 @@ function Chat() {
 						/>
 					))}
 				</Box>
-                <ChatInput channelName={roomDetails?.name} channelId={roomId} />
+				<ChatInput channelName={roomDetails?.name} channelId={roomId} />
 			</Box>
 
-			<div className="chat">
-				
-
-				
-			</div>
+			<div className="chat"></div>
 		</>
 	);
 }
