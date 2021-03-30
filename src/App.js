@@ -5,7 +5,7 @@ import Header from './Header';
 import { AnimatePresence } from 'framer-motion';
 import PortFolio from './Pages/PortFolio';
 import Sidebar from './Sidebar';
-import { useColorMode } from '@chakra-ui/color-mode';
+import { DarkMode, useColorMode } from '@chakra-ui/color-mode';
 import { useDispatch } from 'react-redux';
 import { dark, light } from './features/hoverthemeSlice';
 import { useEffect } from 'react';
@@ -15,19 +15,19 @@ import Chat from './Chat/Chat';
 import axios from 'axios';
 import requests from './Request';
 import { update } from './features/allCoinSlice';
+import { ChakraProvider, ColorModeScript, extendTheme } from '@chakra-ui/react';
 
 function App() {
-	const location = useLocation();
 	const { colorMode, toggleColorMode } = useColorMode();
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (colorMode === 'dark') {
-			dispatch(dark());
-		} else {
-			dispatch(light());
-		}
-	}, [colorMode, dispatch]);
+		// if (colorMode === 'dark') {
+		dispatch(dark());
+		// } else {
+		// 	dispatch(light());
+		// }
+	}, [dispatch]);
 
 	useEffect(() => {
 		function edit(coinapi) {
@@ -59,7 +59,14 @@ function App() {
 	// }, []);
 
 	return (
-		<>
+		<ChakraProvider
+			theme={extendTheme({
+				config: {
+					useSystemColorMode: false,
+					initialColorMode: 'dark',
+				},
+			})}
+		>
 			<Header />
 			<Box
 				d="flex"
@@ -67,30 +74,29 @@ function App() {
 				//  h="100%"
 			>
 				<Sidebar />
-				<AnimatePresence exitBeforeEnter>
-					<Switch location={location} key={location.pathname}>
-						<Route path="/TopCrypto">
-							<TopCryp />
-						</Route>
-						<Route path="/Chart">
-							<ChartPage />
-						</Route>
-						<Route path="/PortFolio">
-							<PortFolio />
-						</Route>
-						<Route path="/:roomId">
-							<Chat />
-						</Route>
-						<Route exact path="/">
-							<PortFolio />
-						</Route>
-					</Switch>
-				</AnimatePresence>
+
+				<Switch>
+					<Route path="/TopCrypto">
+						<TopCryp />
+					</Route>
+					<Route path="/Chart">
+						<ChartPage />
+					</Route>
+					<Route path="/PortFolio">
+						<PortFolio />
+					</Route>
+					<Route path="/:roomId">
+						<Chat />
+					</Route>
+					<Route exact path="/">
+						<PortFolio />
+					</Route>
+				</Switch>
 			</Box>
 
 			{/* Switch: LoginScreen */}
 			{/* Switch: Chat Channels */}
-		</>
+		</ChakraProvider>
 	);
 }
 

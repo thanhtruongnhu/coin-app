@@ -169,7 +169,7 @@ function CoinDisplay({
 					</Stat>
 				</Box>
 			</Box>
-			<Drawer 
+			<Drawer
 				isOpen={isOpen}
 				placement="right"
 				onClose={onClose}
@@ -302,6 +302,8 @@ function CoinDisplay({
 								backgroundColor={isBuy ? '#1E88E5' : '#EF5350'}
 								variant="solid"
 								onClick={() => setActivate(true)}
+								isLoading
+								loadingText="Under Construction..."
 							>
 								Submit Order
 							</Button>
@@ -313,6 +315,7 @@ function CoinDisplay({
 								currentPrice={price}
 								id={id}
 								name={name}
+								
 							/>
 						</DrawerFooter>
 					</DrawerContent>
