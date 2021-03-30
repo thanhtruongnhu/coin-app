@@ -13,7 +13,7 @@ export default function Dropdown() {
 	const coins = useSelector(selectCoin);
 
 	useEffect(() => {
-		dispatch(assign(symbol?.symbol));
+		dispatch(assign(symbol));
 	}, [symbol, dispatch]);
 
 	const style = {

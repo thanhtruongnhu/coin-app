@@ -60,7 +60,7 @@ function Update({
 					.doc(id)
 					.update({ quantity: Coin.quantity, price_bought: Coin.priceBought })
 					.then(() => {
-						console.log('Balance successfully updated!');
+						console.log('Buy order successfully filled!');
 					})
 					.catch((error) => {
 						// The document probably doesn't exist.
@@ -81,7 +81,7 @@ function Update({
 						symbol: firebase.firestore.FieldValue.delete(),
 					})
 					.then(() => {
-						console.log('Balance successfully updated!');
+						console.log('Sell order successfully filled!');
 					})
 					.catch((error) => {
 						// The document probably doesn't exist.

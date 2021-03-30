@@ -1,9 +1,13 @@
 import { Box, Flex, Spacer } from '@chakra-ui/layout';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import BuySellPanel from '../Chart/BuySellPanel';
 import ChartPanel from '../Chart/ChartPanel';
+import { selectSelectCoin } from '../features/selectCoinSlice';
 
 function ChartPage() {
+	const selectCoin = useSelector(selectSelectCoin);
+
 	return (
 		<Box d="flex" flex="0.7" 
         // justifyContent="space-between" 
@@ -15,7 +19,7 @@ function ChartPage() {
 			<ChartPanel />
 			{/* <Spacer /> */}
 			{/* Buy Sell Panel */}
-			<BuySellPanel name='Ethereum' price={1800} quantity={20} id='ethereum'/>
+			<BuySellPanel name={selectCoin?.name} price={1800} quantity={20} id='ethereum'/>
 		</Box>
 	);
 }

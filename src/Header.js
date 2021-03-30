@@ -23,7 +23,7 @@ function Header() {
 		<Flex borderBottom="1px solid ">
 			<LinkBox ml="3" mt="3">
 				<Heading size="md">
-					<LinkOverlay href="#">The Dragon Estacy</LinkOverlay>
+					<LinkOverlay href="/">Coin Simple</LinkOverlay>
 				</Heading>
 			</LinkBox>
 			<Spacer />

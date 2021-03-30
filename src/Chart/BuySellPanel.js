@@ -13,6 +13,7 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectBalance } from '../features/balanceSlice';
+
 import Update from '../Update';
 import Dropdown from './Dropdown';
 
@@ -162,6 +163,8 @@ function BuySellPanel({ name, price, quantity, id }) {
 					backgroundColor={isBuy ? '#1E88E5' : '#EF5350'}
 					variant="solid"
 					onClick={() => setActivate(true)}
+					isLoading
+					loadingText="Under Construction..."
 				>
 					Submit Order
 				</Button>

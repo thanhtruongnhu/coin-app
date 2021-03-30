@@ -20,7 +20,7 @@ function ChartPanel() {
 		if (selectCoin) {
 			axios
 				.get(
-					`https://api.lunarcrush.com/v2?data=assets&key=y9ys125xujn060r5hn77p0r&symbol=${selectCoin}&data_points=200&time_series_indicators=open,close,high,low,volume&indicators=null&interval=day`
+					`https://api.lunarcrush.com/v2?data=assets&key=y9ys125xujn060r5hn77p0r&symbol=${selectCoin?.symbol}&data_points=200&time_series_indicators=open,close,high,low,volume&indicators=null&interval=day`
 				)
 				.then((res) => setState(res.data.data[0].timeSeries));
 		}
@@ -40,7 +40,7 @@ function ChartPanel() {
 	}, [state]);
 
 
-	console.log(selectCoin);
+	// console.log(selectCoin);
 	// console.log(pick);
 
 	return (
