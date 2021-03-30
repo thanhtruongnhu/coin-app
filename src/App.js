@@ -9,7 +9,7 @@ import { useColorMode } from '@chakra-ui/color-mode';
 import { useDispatch } from 'react-redux';
 import { dark, light } from './features/hoverthemeSlice';
 import { useEffect } from 'react';
-import Chart from './Pages/Chart';
+import ChartPage from './Pages/ChartPage';
 import TopCryp from './Pages/TopCryp';
 import Chat from './Chat/Chat';
 import axios from 'axios';
@@ -73,7 +73,7 @@ function App() {
 							<TopCryp />
 						</Route>
 						<Route path="/Chart">
-							<Chart />
+							<ChartPage />
 						</Route>
 						<Route path="/PortFolio">
 							<PortFolio />

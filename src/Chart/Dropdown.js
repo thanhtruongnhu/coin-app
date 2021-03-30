@@ -6,12 +6,6 @@ import { useSelector } from 'react-redux';
 import { selectCoin } from '../features/allCoinSlice';
 import { chakra } from '@chakra-ui/system';
 
-const options = [
-	{ value: 'chocolate', label: 'Chocolate' },
-	{ value: 'strawberry', label: 'Strawberry' },
-	{ value: 'vanilla', label: 'Vanilla' },
-];
-
 export default function Dropdown() {
 	const [ariaFocusMessage, setAriaFocusMessage] = useState('');
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -42,7 +36,7 @@ export default function Dropdown() {
 	const onMenuOpen = () => setIsMenuOpen(true);
 	const onMenuClose = () => setIsMenuOpen(false);
 
-	console.log(symbol);
+	// console.log(symbol);
 
 	function customTheme(theme) {
 		return {
@@ -52,33 +46,13 @@ export default function Dropdown() {
 				primary25: 'orange',
 				primary: 'orange',
 				neutral0: '#11121B',
+				neutral80: 'white',
 			},
 		};
 	}
 
-	const customStyles = {
-		// menu: (provided, state) => ({
-		// 	...provided,
-		// 	width: 200,
-		// borderBottom: '1px dotted pink',
-		// color: state.selectProps.menuColor,
-		// padding: 20,
-		// }),
-
-		control: (_, { selectProps: { width } }) => ({
-			width: width,
-		}),
-
-		// singleValue: (provided, state) => {
-		// 	const opacity = state.isDisabled ? 0.5 : 1;
-		// 	const transition = 'opacity 300ms';
-
-		// 	return { ...provided, opacity, transition };
-		// },
-	};
-
 	return (
-		<chakra.form>
+		<form>
 			<label style={style.label} id="aria-label" htmlFor="aria-example-input">
 				Select a crypto
 			</label>
@@ -103,18 +77,18 @@ export default function Dropdown() {
 				styles={{
 					option: (base) => ({
 						...base,
-						border: `1px solid gray`,
+						border: `1px dotted gray`,
 						height: '100%',
 					}),
 					control: (styles) => ({
 						...styles,
-						backgroundColor: 'white',
+						backgroundColor: '#11121B',
 						width: 350,
-                        textColor: 'blue'
+						textColor: 'blue',
 					}),
 				}}
 				width="300px"
 			/>
-		</chakra.form>
+		</form>
 	);
 }

@@ -4,7 +4,7 @@ import { Box, Flex, Text } from '@chakra-ui/layout';
 import React from 'react';
 
 function Message({ message, timestamp, user, userImage }) {
-	console.log(userImage);
+	console.log(timestamp);
 
 	return (
 		<>

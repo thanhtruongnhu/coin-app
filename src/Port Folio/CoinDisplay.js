@@ -36,6 +36,7 @@ function currencyFormat(num) {
 }
 
 function Converter(x) {
+	// console.log(x)
 	var date = new Date(x); //Convert miliseconds to date
 	return date.toLocaleDateString();
 }

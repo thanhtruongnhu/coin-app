@@ -14,6 +14,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectBalance } from '../features/balanceSlice';
 import Update from '../Update';
+import Dropdown from './Dropdown';
 
 function currencyFormat(num) {
 	return num.toFixed(1).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
@@ -44,8 +45,9 @@ function BuySellPanel({ name, price, quantity, id }) {
 	}, [balance, isBuy, price, quantity]);
 
 	return (
-		<Box d="flex" flex="0.3" borderLeftWidth="1px" minH="700px">
+		<Box flex="0.2" borderLeftWidth="1px" minH="700px">
 			<Box minW="342.45px" px="15px">
+				<Dropdown />
 				<Heading fontSize={20} fontWeight="500" my="20px">
 					{name}
 				</Heading>
@@ -114,8 +116,7 @@ function BuySellPanel({ name, price, quantity, id }) {
 
 							<Alert mt="20px" status={isBuy ? 'info' : 'warning'}>
 								<AlertIcon />
-								You could {isBuy ? 'buy' : 'sell'} up to {allowQuantity}{' '}
-								coins!
+								You could {isBuy ? 'buy' : 'sell'} up to {allowQuantity} coins!
 							</Alert>
 
 							<Text mt="100px" fontWeight="bold" borderTopWidth="1px">
@@ -171,7 +172,7 @@ function BuySellPanel({ name, price, quantity, id }) {
 					currentBalance={currentBalance}
 					currentPrice={price}
 					id={id}
-                    name={name}
+					name={name}
 				/>
 			</Box>
 		</Box>
