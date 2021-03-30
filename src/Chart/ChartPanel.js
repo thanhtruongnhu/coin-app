@@ -8,49 +8,30 @@ import Dropdown from './Dropdown';
 import { timeParse } from 'd3-time-format';
 import axios from 'axios';
 import Chart from './Chart';
-
-const parseDate = timeParse('%Y-%m-%d');
-
-function parseData(d) {
-	// d.date = parseDate(new Date(d.time.toDate()).toLocaleString());
-	// d.open = +d.open;
-	d.high = +d.high;
-	d.low = +d.low;
-	d.close = +d.close;
-	d.volume = +d.volume;
-
-	return d;
-}
+import { selectSelectCoin } from '../features/selectCoinSlice';
 
 function ChartPanel() {
-	const ticker = 'BTC';
+	// const ticker = 'BTC';
+	const selectCoin = useSelector(selectSelectCoin);
 	const [state, setState] = useState(null);
 	const [pick, setPick] = useState(null);
 
 	useEffect(() => {
-		axios
-			.get(
-				`https://api.lunarcrush.com/v2?data=assets&key=y9ys125xujn060r5hn77p0r&symbol=${ticker}&data_points=200&time_series_indicators=open,close,high,low,volume&indicators=null&interval=day`
-			)
-			.then((res) => setState(res.data.data[0].timeSeries));
-		// getData().then((data) => {
-		// 	setPick(data);
-		// });
-
-		// return () => {
-		// 	cleanup;
-		// };
-	}, []);
+		if (selectCoin) {
+			axios
+				.get(
+					`https://api.lunarcrush.com/v2?data=assets&key=y9ys125xujn060r5hn77p0r&symbol=${selectCoin}&data_points=200&time_series_indicators=open,close,high,low,volume&indicators=null&interval=day`
+				)
+				.then((res) => setState(res.data.data[0].timeSeries));
+		}
+	}, [selectCoin]);
 
 	useEffect(() => {
 		if (state) {
 			function get(doc) {
 				let oldDoc = doc;
-
-				let newDoc = { date: new Date(doc.time*1000) };
-
+				let newDoc = { date: new Date(doc.time * 1000) };
 				let editDoc = Object.assign(oldDoc, newDoc);
-
 				return editDoc;
 			}
 
@@ -58,10 +39,12 @@ function ChartPanel() {
 		}
 	}, [state]);
 
-	console.log(pick);
+
+	console.log(selectCoin);
+	// console.log(pick);
 
 	return (
-		<Box flex="0.8">
+		<Box flex="0.85">
 			{/* <Dropdown /> */}
 
 			{pick && <Chart type={'hybrid'} data={pick} />}

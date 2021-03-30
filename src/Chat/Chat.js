@@ -44,7 +44,7 @@ function Chat() {
 
 	return (
 		<>
-			<Box flex="0.7" flexGrow="1" overflowY="hidden" pb="150px">
+			<Box flex="0.7" flexGrow="1" overflowY="scroll" pb="150px">
 				<Flex
 					alignItems="center"
 					justifyContent="space-between"

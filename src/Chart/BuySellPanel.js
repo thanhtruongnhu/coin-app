@@ -45,7 +45,7 @@ function BuySellPanel({ name, price, quantity, id }) {
 	}, [balance, isBuy, price, quantity]);
 
 	return (
-		<Box flex="0.2" borderLeftWidth="1px" minH="700px">
+		<Box flex="0.15" borderLeftWidth="1px" minH="700px">
 			<Box minW="342.45px" px="15px">
 				<Dropdown />
 				<Heading fontSize={20} fontWeight="500" my="20px">

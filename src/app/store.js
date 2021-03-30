@@ -4,6 +4,8 @@ import tickerReducer from '../features/tickerSlice';
 import balanceReducer from '../features/balanceSlice';
 import hoverthemeReducer from '../features/hoverthemeSlice';
 import coinReducer from '../features/allCoinSlice';
+import selectCoinReducer from '../features/selectCoinSlice';
+
 export default configureStore({
 	reducer: {
 		user: userReducer,
@@ -11,5 +13,6 @@ export default configureStore({
 		balance: balanceReducer,
 		hovertheme: hoverthemeReducer,
 		coin: coinReducer,
+		selectCoin: selectCoinReducer,
 	},
 });

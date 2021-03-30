@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
-
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectCoin } from '../features/allCoinSlice';
 import { chakra } from '@chakra-ui/system';
+import { assign } from '../features/selectCoinSlice';
 
 export default function Dropdown() {
+	const dispatch = useDispatch();
 	const [ariaFocusMessage, setAriaFocusMessage] = useState('');
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [symbol, setSymbol] = useState(null);
 	const coins = useSelector(selectCoin);
+
+	useEffect(() => {
+		dispatch(assign(symbol?.symbol));
+	}, [symbol, dispatch]);
 
 	const style = {
 		blockquote: {
@@ -36,7 +40,7 @@ export default function Dropdown() {
 	const onMenuOpen = () => setIsMenuOpen(true);
 	const onMenuClose = () => setIsMenuOpen(false);
 
-	// console.log(symbol);
+	console.log(symbol);
 
 	function customTheme(theme) {
 		return {
@@ -71,6 +75,7 @@ export default function Dropdown() {
 				onMenuOpen={onMenuOpen}
 				onMenuClose={onMenuClose}
 				onChange={setSymbol}
+				// onChange={dispatch(assign())}
 				options={coins}
 				theme={customTheme}
 				// styles={customStyles}

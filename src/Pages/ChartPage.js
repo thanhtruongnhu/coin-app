@@ -9,7 +9,7 @@ function ChartPage() {
         // justifyContent="space-between" 
         // ml="auto" 
         // mr="auto"
-        flexGrow="1"
+        flexGrow="1" 
         >
 			{/* There will be an interactive Chart here */}
 			<ChartPanel />
